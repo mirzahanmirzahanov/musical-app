@@ -66,7 +66,7 @@
 <script>
 export default {
   components: {},
-  name: "",
+  name: "v-header",
   computed: {},
   props: {},
   data: () => ({}),
