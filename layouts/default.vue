@@ -1,3 +1,5 @@
 <template>
-  <Nuxt />
+  <keep-alive>
+    <Nuxt />
+  </keep-alive>
 </template>
