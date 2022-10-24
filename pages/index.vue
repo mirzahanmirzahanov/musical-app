@@ -5,6 +5,7 @@
       <section class="playlists">
         <v-genre-item />
       </section>
+      <button @submit.prevent @click="getG">sdfsfd</button>
     </main>
   </div>
 </template>
@@ -29,6 +30,9 @@ export default {
   }),
   async fetch() {
     await this.getToken(this.apiKeys);
+    // this.getGenres(this.accessToken);
+  },
+  mounted() {
     this.getGenres(this.accessToken);
   },
   computed: {
@@ -41,6 +45,7 @@ export default {
       getToken: "music/GET_TOKEN",
       getGenres: "music/GET_GENRES",
     }),
+    getG() {},
   },
 };
 </script>

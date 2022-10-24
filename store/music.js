@@ -9,10 +9,9 @@ export const state = () => ({
 export const mutations = {
 	SET_TOKEN(state, data) {
 		state.accessToken = data.access_token;
-		// state.accessToken = ;
 	},
-	SET_GENRES(state, data) {
-		state.genres = data
+	SET_GENRES(state, genres) {
+		state.genres = genres
 	}
 }
 export const actions = {
@@ -33,20 +32,13 @@ export const actions = {
 	},
 
 	async GET_GENRES({ commit }, accessToken) {
-		const result = await fetch(
-			"https://api.spotify.com/v1/browse/categories?locale=sv_SE",
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: "Bearer " + accessToken,
-				},
+		const response = await this.$axios.get('/browse/categories?locale=sv_SE', {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + accessToken,
 			}
-		);
-
-		const data = await result.json();
-		console.log(data);
-		commit('SET_GENRES', data)
+		})
+		commit('SET_GENRES', await response.data.categories.items)
 	}
 }
 export const getters = {
