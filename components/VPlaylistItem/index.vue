@@ -1,14 +1,14 @@
 <template>
-  <div class="playlists__grid-item">
+  <div class="playlists__grid-item" @click="getPlaylists(genre)">
     <div class="playlists__grid-item">
       <div class="playlist-img">
         <img
-          src="@/static/imgs/playlist-imgs/nirvana-album-img.jpg"
+          :src="playlist.images[0].url"
           alt="playlist-img"
         />
       </div>
       <div class="playlist-info">
-        <p class="playlist-info__name">Playlist Name</p>
+        <p class="playlist-info__name">{{ playlist.name }}</p>
       </div>
     </div>
   </div>
@@ -20,7 +20,13 @@ export default {
   components: {},
   name: "v-playlist-item",
   computed: {},
-  props: {},
+  props: {
+    playlist: {
+      type: Object,
+      // required: true,
+      default: {},
+    },
+  },
   data: () => ({}),
   methods: {},
 };

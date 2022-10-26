@@ -1,14 +1,19 @@
 <template>
   <div class="playlists__container container">
-    <h2>genre name</h2>
+    <h2>{{ genre.name }}</h2>
     <div class="playlists__grid-container">
-      <v-playlist-item />
+      <v-playlist-item
+        v-for="(playlist, index) in playlists"
+        :key="index"
+        :playlist="playlist"
+      />
     </div>
   </div>
 </template>
 
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import VPlaylistItem from "@/components/VPlaylistItem/index.vue";
 
 export default {
@@ -16,10 +21,45 @@ export default {
     VPlaylistItem,
   },
   name: "v-genre-item",
-  computed: {},
-  props: {},
-  data: () => ({}),
-  methods: {},
+  computed: {
+    ...mapGetters({
+      accessToken: "music/ACCESS_TOKEN",
+      // playlists: "music/PLAYLISTS",
+    }),
+  },
+  props: {
+    genre: {
+      type: Object,
+      // required: true,
+      default: {},
+    },
+  },
+  data() {
+    return {
+      genreItem: this.genre,
+      playlists: null
+    };
+  },
+
+  async fetch() {
+    const response = await this.$axios.get(
+      `/browse/categories/${this.genreItem.id}/playlists`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.accessToken,
+        },
+      }
+    );
+
+    this.playlists = await response.data.playlists.items
+    console.log(this.genreItem.id);
+  },
+  methods: {
+    ...mapActions({
+      getPlaylists: "music/GET_PLAYLISTS",
+    }),
+  },
 };
 </script>
 
@@ -36,7 +76,6 @@ export default {
   &__grid-container {
     display: grid;
     grid-template-columns: repeat(6, 200px);
-    // justify-content: center;
     gap: 25px;
   }
 
@@ -47,9 +86,6 @@ export default {
     background-color: $gray;
     transition: all 0.3s ease-in-out;
     .playlist-img {
-      // max-width: 200px;
-      // max-height: 200px;
-
       img {
         width: 100%;
         height: 100%;

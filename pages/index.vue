@@ -1,12 +1,18 @@
 <template>
-  <div class="wrapper">
+  <div>
+  <p v-if="$fetchState.pending === true">Загрузка данных</p>
+  <div v-else class="wrapper">
     <v-header />
     <main class="main">
       <section class="playlists">
-        <v-genre-item />
+        <v-genre-item 
+          v-for="(genre, index) in genres" 
+          :key="index"  
+          :genre="genre"
+          />
       </section>
-      <button @submit.prevent @click="getG">sdfsfd</button>
     </main>
+  </div>
   </div>
 </template>
 
@@ -30,22 +36,24 @@ export default {
   }),
   async fetch() {
     await this.getToken(this.apiKeys);
-    // this.getGenres(this.accessToken);
   },
   mounted() {
+
     this.getGenres(this.accessToken);
   },
   computed: {
     ...mapGetters({
       accessToken: "music/ACCESS_TOKEN",
+      genres: 'music/GENRES'
     }),
   },
   methods: {
     ...mapActions({
       getToken: "music/GET_TOKEN",
       getGenres: "music/GET_GENRES",
+      
     }),
-    getG() {},
+
   },
 };
 </script>
