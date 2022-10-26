@@ -1,9 +1,9 @@
 <template>
   <div class="playlists__container container">
     <h2>{{ genre.name }}</h2>
-    <div class="playlists__grid-container">
+    <div v-if="this.playlists !== []" class="playlists__grid-container">
       <v-playlist-item
-        v-for="(playlist, index) in playlists"
+        v-for="(playlist, index) in this.playlists"
         :key="index"
         :playlist="playlist"
       />
@@ -24,20 +24,19 @@ export default {
   computed: {
     ...mapGetters({
       accessToken: "music/ACCESS_TOKEN",
-      // playlists: "music/PLAYLISTS",
     }),
   },
   props: {
     genre: {
       type: Object,
-      // required: true,
+      required: true,
       default: {},
     },
   },
   data() {
     return {
       genreItem: this.genre,
-      playlists: null
+      playlists: [],
     };
   },
 
@@ -52,7 +51,7 @@ export default {
       }
     );
 
-    this.playlists = await response.data.playlists.items
+    this.playlists = await response.data.playlists.items;
     console.log(this.genreItem.id);
   },
   methods: {

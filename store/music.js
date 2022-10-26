@@ -2,8 +2,7 @@ import axios from 'axios'
 
 export const state = () => ({
 	accessToken: '',
-	genres: null,
-	playlists: null
+	genres: [],
 
 })
 
@@ -14,9 +13,6 @@ export const mutations = {
 	SET_GENRES(state, genres) {
 		state.genres = genres
 	},
-	SET_PLAYLISTS(state, playlists) {
-		state.playlists = playlists
-	}
 }
 export const actions = {
 	async GET_TOKEN({ commit }, apiKeys) {
@@ -61,7 +57,4 @@ export const getters = {
 	GENRES(state) {
 		return state.genres
 	},
-	PLAYLISTS(state) {
-		return state.playlists
-	}
 }

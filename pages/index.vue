@@ -1,6 +1,6 @@
 <template>
   <div>
-  <p v-if="$fetchState.pending === true">Загрузка данных</p>
+  <p v-if="$fetchState.pending">Загрузка данных</p>
   <div v-else class="wrapper">
     <v-header />
     <main class="main">
@@ -37,8 +37,8 @@ export default {
   async fetch() {
     await this.getToken(this.apiKeys);
   },
+  fetchDelay: 2000,
   mounted() {
-
     this.getGenres(this.accessToken);
   },
   computed: {

@@ -1,16 +1,14 @@
 <template>
   <div class="playlists__grid-item" @click="getPlaylists(genre)">
-    <div class="playlists__grid-item">
+    <div v-if="this.playlist !== null" class="playlists__grid-item">
       <div class="playlist-img">
-        <img
-          :src="playlist.images[0].url"
-          alt="playlist-img"
-        />
+        <img :src="this.playlist.images[0].url" alt="playlist-img" />
       </div>
       <div class="playlist-info">
         <p class="playlist-info__name">{{ playlist.name }}</p>
       </div>
     </div>
+    <p v-else>:(</p>
   </div>
 </template>
 
@@ -23,11 +21,12 @@ export default {
   props: {
     playlist: {
       type: Object,
-      // required: true,
-      default: {},
+      default: null,
     },
   },
-  data: () => ({}),
+  data() {
+    return {};
+  },
   methods: {},
 };
 </script>
