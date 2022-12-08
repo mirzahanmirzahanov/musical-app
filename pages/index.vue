@@ -1,18 +1,18 @@
 <template>
   <div>
-  <p v-if="$fetchState.pending">Загрузка данных</p>
-  <div v-else class="wrapper">
-    <v-header />
-    <main class="main">
-      <section class="playlists">
-        <v-genre-item 
-          v-for="(genre, index) in genres" 
-          :key="index"  
-          :genre="genre"
+    <p v-if="$fetchState.pending">Загрузка данных</p>
+    <div v-else class="wrapper">
+      <v-header />
+      <main class="main">
+        <section class="playlists">
+          <v-genre-item
+            v-for="(genre, index) in genres"
+            :key="index"
+            :genre="genre"
           />
-      </section>
-    </main>
-  </div>
+        </section>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -44,16 +44,14 @@ export default {
   computed: {
     ...mapGetters({
       accessToken: "music/ACCESS_TOKEN",
-      genres: 'music/GENRES'
+      genres: "music/GENRES",
     }),
   },
   methods: {
     ...mapActions({
       getToken: "music/GET_TOKEN",
       getGenres: "music/GET_GENRES",
-      
     }),
-
   },
 };
 </script>

@@ -41,7 +41,7 @@ export const actions = {
 		commit('SET_GENRES', await response.data.categories.items)
 	},
 	async GET_PLAYLISTS({ commit, state }, id) {
-		const response = await this.$axios.get(`/browse/categories/${id}/playlists`, {
+		const response = await this.$axios.get(`/browse/categories/${id}/playlists?limit=8`, {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + state.accessToken,
