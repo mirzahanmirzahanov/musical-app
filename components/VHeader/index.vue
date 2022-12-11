@@ -1,6 +1,12 @@
 <template>
   <header class="header">
-    <audio class="audio-tag"></audio>
+    <audio class="audio-tag" src=""></audio>
+    <!-- <audio 
+			class="audio-tag" 
+			src="https://p.scdn.co/mp3-preview/127d8691ff65a9c521813cbfb973ac5302b7840f?cid=89fdc95d05924d9ab70a01aa35d4623b"
+			controls
+		>
+		</audio> -->
     <div class="header__container container">
       <div class="audio-player">
         <div class="audio-player__switch-buttons">
@@ -77,8 +83,6 @@ export default {
 
 <style lang='scss' scoped>
 @import "@/static/scss/variables.scss";
-
-/*header*/
 
 .header {
 	.img-cont {

@@ -83,7 +83,7 @@ export default {
     height: 280px;
     border-radius: 15px;
     background-color: $gray;
-    transition: all 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
     .playlist-img {
       img {
         width: 100%;
@@ -103,7 +103,7 @@ export default {
   }
 
   &__grid-item:hover {
-    transform: translateX(-2px) translateY(-2px) scale(101%);
+    transform: translateX(-2px) translateY(-2px);
     box-shadow: 3px 3px 13px $shadow;
   }
 }

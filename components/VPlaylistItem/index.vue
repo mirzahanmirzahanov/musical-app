@@ -1,5 +1,10 @@
 <template>
-  <div class="playlists__grid-item" @click="getCurrentPlaylist(playlist.id)">
+  <div>
+    <v-track-list
+      v-if="isTracklistVisible === true"
+      @closePopup="closeTracklist"
+    />
+  <div class="playlists__grid-item" @click="getPlaylist">
     <div v-if="this.playlist !== null" class="playlists__grid-item">
       <div class="playlist-img">
         <img :src="this.playlist.images[0].url" alt="playlist-img" />
@@ -10,14 +15,16 @@
     </div>
     <p v-else>:(</p>
   </div>
+  </div>
 </template>
 
 
 <script>
 import { mapActions } from "vuex";
+import VTrackList from "@/components/VTrackList/index";
 
 export default {
-  components: {},
+  components: { VTrackList },
   name: "v-playlist-item",
   computed: {},
   props: {
@@ -26,11 +33,20 @@ export default {
       default: null,
     },
   },
-  data: () => ({}),
+  data: () => ({
+    isTracklistVisible: false
+  }),
   methods: {
     ...mapActions({
       getCurrentPlaylist: "music/GET_CURRENT_PLAYLIST",
     }),
+    getPlaylist() {
+      this.getCurrentPlaylist(this.playlist.id)
+      this.isTracklistVisible = true
+    },
+    closeTracklist() {
+      this.isTracklistVisible = false
+    }
   },
 };
 </script>
