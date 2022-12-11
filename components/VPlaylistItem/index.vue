@@ -1,5 +1,5 @@
 <template>
-  <div class="playlists__grid-item" @click="getPlaylists(genre)">
+  <div class="playlists__grid-item" @click="getCurrentPlaylist(playlist.id)">
     <div v-if="this.playlist !== null" class="playlists__grid-item">
       <div class="playlist-img">
         <img :src="this.playlist.images[0].url" alt="playlist-img" />
@@ -14,6 +14,8 @@
 
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   components: {},
   name: "v-playlist-item",
@@ -24,9 +26,11 @@ export default {
       default: null,
     },
   },
-  data() {
-    return {};
+  data: () => ({}),
+  methods: {
+    ...mapActions({
+      getCurrentPlaylist: "music/GET_CURRENT_PLAYLIST",
+    }),
   },
-  methods: {},
 };
 </script>

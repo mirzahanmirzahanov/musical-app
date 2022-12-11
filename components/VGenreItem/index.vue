@@ -6,6 +6,7 @@
         v-for="(playlist, index) in this.playlists"
         :key="index"
         :playlist="playlist"
+        
       />
     </div>
   </div>
@@ -52,11 +53,10 @@ export default {
     );
 
     this.playlists = await response.data.playlists.items;
-    console.log(this.genreItem.id);
   },
   methods: {
     ...mapActions({
-      getPlaylists: "music/GET_PLAYLISTS",
+      // getPlaylists: "music/GET_PLAYLISTS",
     }),
   },
 };
