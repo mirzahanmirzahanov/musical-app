@@ -6,7 +6,6 @@
         v-for="(playlist, index) in this.playlists"
         :key="index"
         :playlist="playlist"
-        
       />
     </div>
   </div>
@@ -75,6 +74,7 @@ export default {
   &__grid-container {
     display: grid;
     grid-template-columns: repeat(6, 200px);
+    justify-content: center;
     gap: 25px;
   }
 

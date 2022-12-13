@@ -1,17 +1,31 @@
 <template>
   <div class="tracklist-wrapper" ref="tracklist-wrapper">
     <div class="tracklist">
-      <div class="tracklist__container">Popup</div>
+      <div class="tracklist__container">
+        <v-track-item 
+          v-for="index in currentPlaylist" 
+          :key="index" 
+        />
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+import VTrackItem from "@/components/VTrackItem/index.vue";
+
 export default {
-  components: {},
+  components: {
+    VTrackItem,
+  },
   name: "v-track-list",
-  computed: {},
+  computed: {
+    ...mapGetters({
+      currentPlaylist: "music/CURRENT_PLAYLIST",
+    }),
+  },
   props: {},
   data: () => ({}),
   mounted() {
@@ -34,7 +48,7 @@ export default {
 @import "@/static/scss/variables.scss";
 
 .tracklist-wrapper {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,9 +57,21 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 120;
+  z-index: 20;
   .tracklist {
-    z-index: 130;
+    width: 100%;
+    max-width: 1400px;
+    height: 90vh;
+    margin: 50px 100px;
+    z-index: 30;
+    background: #202020;
+    border-radius: 10px;
+    &__container {
+      height: 100%;
+      overflow: hidden;  
+      overflow-y: scroll;
+      padding: 30px;
+    }
   }
 }
 </style>
