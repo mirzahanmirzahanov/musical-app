@@ -1,7 +1,7 @@
 <template>
-  <div class="track-item">
+  <div class="track-item" @click="setTrack(track)">
     <div class="track-item__container container">
-      <p class="track-item__name">Название трека</p>
+      <p class="track-item__name">{{ track?.name }}</p>
       <p class="track-item__authors">Автор трека</p>
     </div>
   </div>
@@ -9,15 +9,24 @@
 
 
 <script>
-
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {},
   name: "v-track-item",
   computed: {},
-  props: {},
+  props: {
+    track: {
+      type: Object,
+      default: {},
+    },
+  },
   data: () => ({}),
-  methods: {},
+  methods: {
+    ...mapMutations({
+      setTrack: "music/SET_CURRENT_TRACK",
+    }),
+  },
 };
 </script>
 
@@ -26,7 +35,6 @@ export default {
 @import "@/static/scss/variables.scss";
 
 .track-item {
-  
   background: $gray;
   border-radius: 10px;
   &__container {

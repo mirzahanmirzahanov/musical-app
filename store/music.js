@@ -3,7 +3,8 @@ import axios from 'axios'
 export const state = () => ({
 	accessToken: '',
 	genres: [],
-	currentPlaylist: null
+	currentTracklist: null,
+	currentTrack: null
 
 })
 
@@ -14,9 +15,12 @@ export const mutations = {
 	SET_GENRES(state, genres) {
 		state.genres = genres
 	},
-	SET_CURRENT_PLAYLIST(state, currentPlaylist) {
-		state.currentPlaylist = currentPlaylist
-	}
+	SET_CURRENT_TRACKLIST(state, currentTracklist) {
+		state.currentTracklist = currentTracklist
+	},
+	SET_CURRENT_TRACK(state, currentTrack) {
+		state.currentTrack = currentTrack
+	},
 }
 export const actions = {
 	async GET_TOKEN({ commit }, apiKeys) {
@@ -45,7 +49,8 @@ export const actions = {
 
 		commit('SET_GENRES', await response.data.categories.items)
 	},
-	async GET_CURRENT_PLAYLIST({ commit, state }, id) {
+	
+	async GET_CURRENT_TRACKLIST({ commit, state }, id) {
 		const response = await this.$axios.get(
 			`/playlists/${id}/tracks`,
 			{
@@ -57,7 +62,7 @@ export const actions = {
 			}
 		);
 
-		commit('SET_CURRENT_PLAYLIST', response.data.items)
+		commit('SET_CURRENT_TRACKLIST', response.data.items)
 	},
 	// async GET_PLAYLISTS({ commit, state }, id) {
 	// 	const response = await this.$axios.get(`/browse/categories/${id}/playlists?limit=8`, {
@@ -76,7 +81,10 @@ export const getters = {
 	GENRES(state) {
 		return state.genres
 	},
-	CURRENT_PLAYLIST(state) {
-		return state.currentPlaylist
+	CURRENT_TRACKLIST(state) {
+		return state.currentTracklist
+	},
+	CURRENT_TRACK(state) {
+		return state.currentTrack
 	},
 }

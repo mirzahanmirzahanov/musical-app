@@ -4,7 +4,7 @@
       v-if="isTracklistVisible === true"
       @closePopup="closeTracklist"
     />
-  <div class="playlists__grid-item" @click="getPlaylist">
+  <div class="playlists__grid-item" @click="getTracklist">
     <div v-if="this.playlist !== null" class="playlists__grid-item">
       <div class="playlist-img">
         <img :src="this.playlist.images[0].url" alt="playlist-img" />
@@ -38,10 +38,10 @@ export default {
   }),
   methods: {
     ...mapActions({
-      getCurrentPlaylist: "music/GET_CURRENT_PLAYLIST",
+      getCurrentTracklist: "music/GET_CURRENT_TRACKLIST",
     }),
-    getPlaylist() {
-      this.getCurrentPlaylist(this.playlist.id)
+    getTracklist() {
+      this.getCurrentTracklist(this.playlist.id)
       this.isTracklistVisible = true
     },
     closeTracklist() {

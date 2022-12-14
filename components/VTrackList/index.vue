@@ -2,9 +2,10 @@
   <div class="tracklist-wrapper" ref="tracklist-wrapper">
     <div class="tracklist">
       <div class="tracklist__container">
-        <v-track-item 
-          v-for="index in currentPlaylist" 
-          :key="index" 
+        <v-track-item
+          v-for="(track, index) in currentTracklist"
+          :key="index"
+          :track="track.track"
         />
       </div>
     </div>
@@ -13,7 +14,7 @@
 
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import VTrackItem from "@/components/VTrackItem/index.vue";
 
 export default {
@@ -23,7 +24,7 @@ export default {
   name: "v-track-list",
   computed: {
     ...mapGetters({
-      currentPlaylist: "music/CURRENT_PLAYLIST",
+      currentTracklist: "music/CURRENT_TRACKLIST",
     }),
   },
   props: {},
@@ -68,7 +69,7 @@ export default {
     border-radius: 10px;
     &__container {
       height: 100%;
-      overflow: hidden;  
+      overflow: hidden;
       overflow-y: scroll;
       padding: 30px;
     }
