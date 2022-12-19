@@ -64,15 +64,6 @@ export const actions = {
 
 		commit('SET_CURRENT_TRACKLIST', response.data.items)
 	},
-	// async GET_PLAYLISTS({ commit, state }, id) {
-	// 	const response = await this.$axios.get(`/browse/categories/${id}/playlists?limit=8`, {
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 			Authorization: "Bearer " + state.accessToken,
-	// 		}
-	// 	})
-	// 	commit('SET_PLAYLISTS', await response.data.playlists.items)
-	// }
 }
 export const getters = {
 	ACCESS_TOKEN(state) {

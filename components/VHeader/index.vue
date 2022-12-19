@@ -1,12 +1,6 @@
 <template>
   <header class="header">
-    <audio class="audio-tag" src=""></audio>
-    <!-- <audio 
-			class="audio-tag" 
-			src="https://p.scdn.co/mp3-preview/3f0bf5eacf77eece39a5b9d76b6522dfaa695e5e?cid=89fdc95d05924d9ab70a01aa35d4623b"
-			controls
-		>
-		</audio> -->
+    <audio class="audio-tag" :src="currentTrack?.preview_url" />
     <div class="header__container container">
       <div class="audio-player">
         <div class="audio-player__switch-buttons">
@@ -70,12 +64,19 @@
 
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   components: {},
   name: "v-header",
-  computed: {},
+  data: () => ({
+	}),
+  computed: {
+    ...mapGetters({
+      currentTrack: "music/CURRENT_TRACK",
+    }),
+  },
   props: {},
-  data: () => ({}),
   methods: {},
 };
 </script>
@@ -106,79 +107,78 @@ export default {
 
 	}
 
-	&__container {
-		padding: 15px;
-		width: 100%;
-		max-width: 1000px;
-		.audio-player {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 20px;
-			background-color: #333333;
-			border-radius: 10px;
+  &__container {
+    padding: 15px;
+    width: 100%;
+    max-width: 1000px;
+    .audio-player {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #333333;
+      border-radius: 10px;
 
-			p {
-				font-size: 14px;
-				margin: 0 0 5px 0;
-				cursor: default;
-			}
+      p {
+        font-size: 14px;
+        margin: 0 0 5px 0;
+        cursor: default;
+      }
 
-			&__switch-buttons {
-				margin: 0 10px;
-				display: flex;
-			}
+      &__switch-buttons {
+        margin: 0 10px;
+        display: flex;
+      }
 
-			&__panel {
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				margin: 0 10px;
-				.progress__container {
-					border-radius: 10px;
-					width: 500px;
-					height: 6px;
-					background-color: $gray;
-					cursor: pointer;
+      &__panel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 10px;
+        .progress__container {
+          border-radius: 10px;
+          width: 500px;
+          height: 6px;
+          background-color: $gray;
+          cursor: pointer;
 
-					.progress {
-						border-radius: 10px;
-						width: 80px;
-						height: 6px;
-						background-color: $pink;
-					}
-				}
-			}
+          .progress {
+            border-radius: 10px;
+            width: 80px;
+            height: 6px;
+            background-color: $pink;
+          }
+        }
+      }
 
-			&__volume {
-				margin: 0 10px;
-				display: flex;
-				.img-cont:hover {
-					background-color: $pink;
-				}
-				.volume-container {
-					background-color: $gray;
-					margin: auto 0 auto 5px;
-					border-radius: 10px;
-					width: 100px;
-					height: 6px;
-					cursor: pointer;
+      &__volume {
+        margin: 0 10px;
+        display: flex;
+        .img-cont:hover {
+          background-color: $pink;
+        }
+        .volume-container {
+          background-color: $gray;
+          margin: auto 0 auto 5px;
+          border-radius: 10px;
+          width: 100px;
+          height: 6px;
+          cursor: pointer;
 
-					.volume {
-						border-radius: 10px;
-						width: 20px;
-						height: 6px;
-						background-color: $pink;
-					}
-				}
-			}
+          .volume {
+            border-radius: 10px;
+            width: 20px;
+            height: 6px;
+            background-color: $pink;
+          }
+        }
+      }
 
-			&__additional-buttons {
-				margin: 0 10px;
-				display: flex;
-			}
-		}
-	}
+      &__additional-buttons {
+        margin: 0 10px;
+        display: flex;
+      }
+    }
+  }
 }
-
 </style>
