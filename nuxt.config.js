@@ -20,6 +20,9 @@ export default {
   css: [
     { rel: 'stylesheet', type: 'text/css', src: '@/static/css/base-styles.css' }
   ],
+  // script: [
+  //   { src: '/js/main.js', type: 'text/javascript' }
+  // ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

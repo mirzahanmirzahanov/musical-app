@@ -6,26 +6,38 @@
         <div class="audio-player__switch-buttons">
           <div class="btn prev img-cont">
             <img
+              class="prev-btn"
               src="@/static/imgs/switch-buttons/prev-btn.png"
               alt="prev-btn"
+              @click="prevSong"
             />
           </div>
           <div class="btn play img-cont">
             <img
+              class="play-btn"
               src="@/static/imgs/switch-buttons/play-btn.png"
               alt="play-btn"
+              @click="playSong"
+            />
+            <img
+              class="stop-btn"
+              src="@/static/imgs/switch-buttons/stop-btn.png"
+              alt="stop-btn"
+              @click="pauseSong"
             />
           </div>
           <div class="btn next img-cont">
             <img
+              class="next-btn"
               src="@/static/imgs/switch-buttons/next-btn.png"
               alt="next-btn"
+              @click="nextSong"
             />
           </div>
         </div>
         <div class="audio-player__panel">
           <div class="panel-song-info">
-            <p class="song-name">Евгений Онегин</p>
+            <p class="song-name">{{ currentTrack?.name }}</p>
             <p class="song-author">kizaru</p>
           </div>
           <div class="progress__container">
@@ -64,20 +76,48 @@
 
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import { DataPlayer, PlayerComponents } from "@/static/js/PlayerController";
 
 export default {
   components: {},
   name: "v-header",
   data: () => ({
-	}),
+    audio: null,
+  }),
   computed: {
     ...mapGetters({
       currentTrack: "music/CURRENT_TRACK",
+      currentTracklist: "music/CURRENT_TRACKLIST",
     }),
   },
+  mounted() {
+    PlayerComponents(".audio-tag", ".play-btn", ".stop-btn");
+  },
   props: {},
-  methods: {},
+  methods: {
+    ...mapMutations({
+      setCurrentTrack: "music/SET_CURRENT_TRACK",
+    }),
+    playSong() {
+      DataPlayer.playSong();
+    },
+    pauseSong() {
+      DataPlayer.pauseSong();
+    },
+    prevSong() {
+      DataPlayer.pauseSong();
+      DataPlayer.prevSong(this.currentTrack, this.currentTracklist);
+      this.setCurrentTrack(DataPlayer.track);
+      // setTimeout(DataPlayer.playSong(), 800)
+    },
+    nextSong() {
+      DataPlayer.pauseSong();
+      DataPlayer.nextSong(this.currentTrack, this.currentTracklist);
+      this.setCurrentTrack(DataPlayer.track);
+      // setTimeout(DataPlayer.playSong(), 800)
+    },
+  },
 };
 </script>
 
@@ -86,26 +126,28 @@ export default {
 @import "@/static/scss/variables.scss";
 
 .header {
-	.img-cont {
-		width: 40px;
-		height: 40px;
-		margin: 3px;
-		transition: 0.3s ease-in-out;
-		border-radius: 50%;
-		background-color: $pink;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		img {
-			width: 32px;
-			height: 32px;
-			cursor: pointer;
-		}
-	}
-	.img-cont:hover {
-		background-color: $pinkDark;
-
-	}
+  .img-cont {
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+    transition: 0.3s ease-in-out;
+    border-radius: 50%;
+    background-color: $pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .stop-btn {
+      display: none;
+    }
+    img {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+    }
+  }
+  .img-cont:hover {
+    background-color: $pinkDark;
+  }
 
   &__container {
     padding: 15px;
